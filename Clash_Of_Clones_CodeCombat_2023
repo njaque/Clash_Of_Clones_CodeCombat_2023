@@ -1,0 +1,33 @@
+def findHealtyEnemy(enemies):
+    stronger = None
+    higherHealth = -1
+    
+    for enemy in enemies:
+        if enemy.health > higherHealth:
+            stronger = enemy
+            higherHealth = enemy.health
+    return stronger
+
+def FindingArchers(archer, enemies):
+    for enemy in enemies:
+        if enemy.type == "archer":
+            archer = enemy
+    return archer
+
+enemies = hero.findEnemies()
+archer = FindingArchers(archer, enemies)
+if archer:
+    hero.cast("chain-lightning", archer)
+
+enemies = hero.findEnemies()
+stronger = findHealtyEnemy(enemies)
+while stronger.health > 0:
+    hero.attack(stronger)
+
+while True:
+    enemy = hero.findNearestEnemy()
+    if enemy.type != "sand-yak":
+        if hero.isReady("chain-lightning"):
+            hero.cast("chain-lightning", enemy)
+        else:
+            hero.attack(enemy)
